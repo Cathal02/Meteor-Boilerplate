@@ -1,0 +1,16 @@
+.dashboard__container div {
+  height: 30vh;
+  width: 30vw;
+}
+
+.dashboard__container {
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard__container__content {
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}

@@ -1,38 +1,18 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: 'Montserrat', 'arial', 'sans-serif';
 }
 
-html{
-  font-size: 62.5%;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Karla;
 }
 
-body{
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: $base-font-size;
-}
-
-h1{
-  font-weight: 300;
-  margin-bottom: $space;
-  color: #292b2c
-}
-
-h2{
-  margin-bottom: $space;
-  font-size: $large-font-size;
-}
-
-p{
-  margin-bottom: $space;
-}
-a {
-  color: $link-color;
-}
-
-input[type=text], input[type=email], input[type=password] {
-  border: 1px solid  $input-border;
-  font-size: $base-font-size;
-  margin-bottom: $space;
-  padding: $input-spacing;
+body {
+  background-color: #f7f7f7;
 }

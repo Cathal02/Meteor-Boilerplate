@@ -1,46 +1,45 @@
 import React from 'react'
-import {Router, Route, browserHistory} from 'react-router'
-import {Meteor} from 'meteor/meteor'
+import { Router, Route, Link, Switch, Redirect } from 'react-router-dom'
+import { Meteor } from 'meteor/meteor'
 
+import history from './history'
 import Signup from '../ui/Signup'
-import Dashboard from '../ui/Dashboard'
+import Home from '../ui/Home'
 import Login from '../ui/Login'
 import NotFound from '../ui/NotFound'
 
-const unauthenticatedPages = ['/', '/signup', '/login']
-const authenticatedPages = ['/dashboard']
-window.browserHistory = browserHistory;
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      Meteor.userId() != null ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{ pathname: '/login', state: { from: props.location } }}
+        />
+      )}
+  />
+)
 
-const onEnterPublicPage = () => {
-  if(Meteor.userId()){
-    browserHistory.replace('/dashboard')
-  }
-}
-
-const onEnterPrivatePage = () => {
-  if(!Meteor.userId()){
-    browserHistory.replace('/')
-  }
-}
-
-export const onAuthChange = (isAuthenticated) => {
-
-  const pathname = browserHistory.getCurrentLocation().pathname;
-  const isUnauthenticatedPage = unauthenticatedPages.includes(pathname);
-  const isAuthenticatedPage = authenticatedPages.includes(pathname);
-
-  if(isUnauthenticatedPage && isAuthenticated){
-    browserHistory.replace('/dashboard')
-  } else if (isAuthenticatedPage && !isAuthenticated ){
-    browserHistory.replace('/login');
-  }
-}
+const ProtectedRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      Meteor.userId() != null ? (
+        <Redirect to="/dashboard" />
+      ) : (
+        <Component {...props} />
+      )}
+  />
+)
 export const routes = (
-    <Router history={browserHistory} >
-      <Route path="/" component={Login}/>
-      <Route path="/signup" component={Signup} onEnter={onEnterPublicPage}/>
-      <Route path="/login" component={Login} onEnter={onEnterPublicPage}/>
-      <Route path="/dashboard" component={Dashboard} onEnter={onEnterPrivatePage}/>
-      <Route path="*" component={NotFound}/>
-    </Router>
-);
+  <Router history={history}>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <ProtectedRoute exact path="/signup" component={Signup} />
+      <ProtectedRoute path="/login" component={Login} />
+      <Route component={NotFound} />
+    </Switch>
+  </Router>
+)

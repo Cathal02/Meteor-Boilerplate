@@ -1,0 +1,31 @@
+.root {
+  flex-grow: 1;
+  height: 430;
+  zindex: 1;
+  overflow: "hidden";
+  position: "relative";
+  display: "flex";
+  width: "100%";
+  background-image: url("https://images.pexels.com/photos/675764/pexels-photo-675764.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+}
+
+.PrivateHeader-toolbar-4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer__item {
+  font-size: 16px;
+
+  margin-left: 24px;
+}
+
+.drawer__items h3 {
+  padding: 6px 0 6px 6px;
+  font-weight: 500 !important;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+  }
+}

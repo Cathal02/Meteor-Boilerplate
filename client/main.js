@@ -1,16 +1,12 @@
-import {Meteor} from 'meteor/meteor'
-import {Tracker} from 'meteor/tracker'
-import React from 'react'
-import ReactDom from 'react-dom'
+import { Meteor } from "meteor/meteor";
+import { Tracker } from "meteor/tracker";
+import React from "react";
+import ReactDom from "react-dom";
 
-import {onAuthChange, routes} from '../imports/routes/routes'
-import '../imports/startup/simple-schema-configuration.js'
-
-Tracker.autorun(() => {
-    const isAuthenticated = !!Meteor.userId();
-    onAuthChange(isAuthenticated);
-})
+import { routes } from "../imports/routes/routes";
+import { onAuthChange } from "../imports/routes/routes";
+import "../imports/startup/simple-schema-configuration.js";
 
 Meteor.startup(() => {
-ReactDom.render(routes, document.getElementById('app'));
-})
+  ReactDom.render(routes, document.getElementById("app"));
+});
